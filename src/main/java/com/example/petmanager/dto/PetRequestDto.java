@@ -9,13 +9,13 @@ import lombok.Setter;
 @Setter
 public class PetRequestDto {
 
-    @NotBlank
+    @NotBlank(message = "Name is required")
     private String name;
 
-    @NotBlank
+    @NotBlank(message = "Species is required")
     private String species;
 
-    @Min(0)
+    @Min(value = 0, message = "Age must be greater than or equal to 0")
     private Integer age;
 
     private String ownerName;
