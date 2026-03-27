@@ -3,34 +3,15 @@ package com.example.petmanager.mapper;
 import com.example.petmanager.dto.PetRequestDto;
 import com.example.petmanager.dto.PetResponseDto;
 import com.example.petmanager.model.Pet;
-import org.springframework.stereotype.Component;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
-@Component
-public class PetMapper {
+@Mapper(componentModel = "spring")
+public interface PetMapper {
 
-    public Pet toEntity(PetRequestDto dto) {
-        Pet pet = new Pet();
-        pet.setName(dto.getName());
-        pet.setSpecies(dto.getSpecies());
-        pet.setAge(dto.getAge());
-        pet.setOwnerName(dto.getOwnerName());
-        return pet;
-    }
+    Pet toEntity(PetRequestDto dto);
 
-    public PetResponseDto toResponseDto(Pet pet) {
-        PetResponseDto dto = new PetResponseDto();
-        dto.setId(pet.getId());
-        dto.setName(pet.getName());
-        dto.setSpecies(pet.getSpecies());
-        dto.setAge(pet.getAge());
-        dto.setOwnerName(pet.getOwnerName());
-        return dto;
-    }
+    PetResponseDto toResponseDto(Pet pet);
 
-    public void updateEntityFromDto(PetRequestDto dto, Pet pet) {
-        pet.setName(dto.getName());
-        pet.setSpecies(dto.getSpecies());
-        pet.setAge(dto.getAge());
-        pet.setOwnerName(dto.getOwnerName());
-    }
+    void updateEntityFromDto(PetRequestDto dto, @MappingTarget Pet pet);
 }
